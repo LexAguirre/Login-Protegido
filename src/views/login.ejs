@@ -1,27 +1,15 @@
 <%- layout('layouts/main.ejs') %>
-
 <div class="row">
   <div class="col-md-4 offset-md-4">
     <div class="card text-white bg-dark mt-4">
       <div class="card-header text-white bg-dark text-center">
-        <h3>SIGN UP</h3>
+        <h3>LOG IN</h3>
       </div>
       <div class="card-body">
-        <form action="/signup" method="POST">
+        <form action="/login" method="POST">
           <div class="form-group">
             <label for="" class="col-form-label"
-              ><strong>Nombre completo: </strong></label
-            >
-            <input
-              class="form-control"
-              type="text"
-              name="name"
-              placeholder="Ingresa tu nombre(s)"
-            />
-          </div>
-          <div class="form-group">
-            <label for="" class="col-form-label"
-              ><strong>Correo electrónico: </strong></label
+              ><strong>Correo electrónico:</strong></label
             >
             <input
               class="form-control"
@@ -32,7 +20,7 @@
           </div>
           <div class="form-group">
             <label for="" class="col-form-label"
-              ><strong>Contraseña</strong></label
+              ><strong>Contraseña: </strong></label
             >
             <input
               class="form-control"
@@ -41,9 +29,19 @@
               placeholder="Escribe tu contraseña"
             />
           </div>
-          <button class="btn btn-primary btn-block mt-4" type="submit">
-            Sign Up
-          </button>
+          <div class="form-group">
+            <div
+              name="reCaptcha"
+              class="g-recaptcha"
+              data-sitekey="6LeFk-AkAAAAAIR6bHbr3Hzg-9v6mjbazN_Prjfg"
+            ></div>
+          </div>
+
+          <div class="">
+            <button class="btn btn-primary btn-block mt-4" type="submit">
+              Log In
+            </button>
+          </div>
         </form>
       </div>
     </div>
