@@ -33,6 +33,13 @@ router.get("/profile", isAuthenticated, (req, res, next) => {
   res.render("profile");
 });
 
+router.get(
+  "/mainPage",
+  /*isAuthenticated,*/ (req, res, next) => {
+    res.render("mainPage");
+  }
+);
+
 router.get("/logout", (req, res, next) => {
   req.logout(() => {
     res.redirect("/");
