@@ -17,46 +17,104 @@
       async
       defer
     ></script>
+    <script
+      src="https://kit.fontawesome.com/7f30cdf123.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
-  <body
-    style="background: linear-gradient(to right, rgb(8, 8, 49), rgb(0, 0, 0))"
-  >
-    <!-- Navbar -->
-    <nav
-      class="navbar navbar-expand-lg navbar-light"
-      style="
-        background: linear-gradient(to right, rgb(253, 219, 0), rgb(0, 0, 0));
-      "
-    >
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-          <img
-            src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/2a69b018212139.562c5c3107147.png"
-            width="100"
-            height="70"
-            alt="logo"
-            class="mx-auto d-block"
-          />
-        </a>
-      </div>
-    </nav>
-
-    <br>
-    
+  <body>
+    <div class="container-fluid sticky-top" style="background-color: #086e5d">
+      <!-- NavBar -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand">Farmacia</a>
+        <img
+          src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/2a69b018212139.562c5c3107147.png"
+          width="100"
+          height="70"
+          alt="logo"
+          class="mx-auto d-block"
+        />
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-brand" id="navbarNav">
+          <form class="form-inline navbar-brand">
+            <a
+              class="btn btn-sm btn-outline-secondary"
+              href="/mainPage"
+              type="button"
+              >Página principal</a
+            >
+            <a
+              class="btn btn-sm btn-outline-secondary"
+              href="/profile"
+              type="button"
+              >Vista productos</a
+            >
+            <a
+              class="btn btn-sm btn-outline-secondary"
+              href="/profile"
+              type="button"
+              >Vista Personal</a
+            >
+            <a
+              class="btn btn-sm btn-outline-secondary"
+              href="/profile"
+              type="button"
+              >Registro productos</a
+            >
+            <a
+              class="btn btn-sm btn-outline-secondary"
+              href="/signup"
+              type="button"
+              >Registro Personal</a
+            >
+            <a class="btn btn-outline-danger" href="/signup" type="button"
+              >Cerrar sesión</a
+            >
+          </form>
+        </div>
+      </nav>
+    </div>
+    <br />
+    <center><h1>Welcome!</h1></center>
+    <br />
     <center>
-      <div class="card text-white bg-dark card-body " style="width: 40rem">
-        <h1>Welcome!</h1>
-        <div class="card-body">
-          <p class="card-text">
+      <div class="card mb-3" style="max-width: 1200px">
+        <div
+          class="row no-gutters"
+          style="
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+          "
+        >
+          <div class="col-md-4">
+            <img
+              src="https://cdn.icon-icons.com/icons2/2483/PNG/512/user_icon_149851.png"
+              alt="..."
+            />
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
               <h3><strong>NAME: </strong><%= user.name %></h3>
               <p><strong>EMAIL: </strong><%= user.email %></p>
               <p><strong>PASSWORD: </strong><%= user.password %></p>
-          </p>
+            </div>
+          </div>
         </div>
       </div>
-      </center>
+    </center>
 
-    <a href="/login">Signup</a>
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

@@ -23,7 +23,7 @@ router.post(
 router.post(
   "/login",
   passport.authenticate("local-login", {
-    successRedirect: "/profile",
+    successRedirect: "/mainPage",
     failureRedirect: "/",
     passReqToCallback: true,
   })
