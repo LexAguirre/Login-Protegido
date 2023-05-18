@@ -96,10 +96,30 @@
     </div>
 
     <br />
+    <center><h1>Personal</h1></center>
 
     <center>
-      <table class="styled-table">
-        <tr>
+      <table
+        class="styled-table"
+        style="
+          width: 100%;
+          border-collapse: collapse;
+          margin: 25px 0;
+          font-size: 0.9em;
+          font-family: sans-serif;
+          min-width: 400px;
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        "
+      >
+        <tr
+          style="
+            background-color: #086e5d;
+            color: #ffffff;
+            text-align: center;
+            border-bottom: 2px solid #dddddd;
+            padding: 12px 15px;
+          "
+        >
           <th>Nombre</th>
           <th>Apellido</th>
           <th>Número telefonico</th>
@@ -112,16 +132,22 @@
         <!--Dentro de la tabla se estara ingresando la informacion proveniente del json-->
         <% Object.keys(person).forEach(function(prop) { %>
         <!--Menciona que por cada llave de person utilizara un prop-->
-        <tr>
-          <td><%- person[prop].name %></td>
+        <tr
+          style="
+            background-color: #f3f3f3;
+            border-bottom: 2px solid #009879;
+            text-align: center;
+          "
+        >
+          <td style="padding: 12px 15px"><%- person[prop].name %></td>
           <td><%- person[prop].lastName %></td>
           <td><%- person[prop].phone %></td>
           <td><%- person[prop].email %></td>
           <td>$ <%- person[prop].password %></td>
           <td>
-            <a href="<%= `deletePerson/${person[prop]._id}` %>">Delete</a>
+            <a href="<%= `deletePerson/${person[prop]._id}` %>">Eliminar</a>
           </td>
-          <td><a href="<%= `findById/${person[prop]._id}` %>">Update</a></td>
+          <td><a href="<%= `findById/${person[prop]._id}` %>">Editar</a></td>
         </tr>
         <% }); %>
       </table>
