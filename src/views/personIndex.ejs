@@ -49,9 +49,9 @@
           <form class="form-inline navbar-brand">
             <a
               class="btn btn-sm btn-outline-secondary"
-              href="/mainPage"
+              href="/profile"
               type="button"
-              >Página principal</a
+              >Perfil</a
             >
             <a
               class="btn btn-sm btn-outline-secondary"
@@ -63,7 +63,7 @@
               class="btn btn-sm btn-outline-secondary"
               href="/profile"
               type="button"
-              >Vista Personal</a
+              >Vista personal</a
             >
             <a
               class="btn btn-sm btn-outline-secondary"
@@ -81,7 +81,7 @@
               class="btn btn-sm btn-outline-secondary"
               href="/person"
               type="button"
-              >Registro Personal</a
+              >Registro personal</a
             >
             <a
               class="btn btn-sm btn-outline-secondary"
@@ -89,40 +89,42 @@
               type="button"
               >Registro proveedores</a
             >
-            <a class="btn btn-outline-danger" type="button">Cerrar sesión</a>
+            <a <a class="btn btn-outline-danger" type="button">Cerrar sesión</a>
           </form>
         </div>
       </nav>
     </div>
+
     <br />
-    <center><h1>Welcome!</h1></center>
-    <br />
+
     <center>
-      <div class="card mb-3" style="max-width: 1200px">
-        <div
-          class="row no-gutters"
-          style="
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-          "
-        >
-          <div class="col-md-4">
-            <img
-              src="https://cdn.icon-icons.com/icons2/2483/PNG/512/user_icon_149851.png"
-              alt="..."
-            />
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h3><strong>NAME: </strong><%= user.name %></h3>
-              <p><strong>EMAIL: </strong><%= user.email %></p>
-              <p><strong>PASSWORD: </strong><%= user.password %></p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <table class="styled-table">
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Número telefonico</th>
+          <th>Email</th>
+          <th>Contraseña</th>
+          <th></th>
+          <th></th>
+          <!--Se crean dos columnas sin nombre-->
+        </tr>
+        <!--Dentro de la tabla se estara ingresando la informacion proveniente del json-->
+        <% Object.keys(person).forEach(function(prop) { %>
+        <!--Menciona que por cada llave de person utilizara un prop-->
+        <tr>
+          <td><%- person[prop].name %></td>
+          <td><%- person[prop].lastName %></td>
+          <td><%- person[prop].phone %></td>
+          <td><%- person[prop].email %></td>
+          <td>$ <%- person[prop].password %></td>
+          <td>
+            <a href="<%= `deletePerson/${person[prop]._id}` %>">Delete</a>
+          </td>
+          <td><a href="<%= `findById/${person[prop]._id}` %>">Update</a></td>
+        </tr>
+        <% }); %>
+      </table>
     </center>
 
     <script

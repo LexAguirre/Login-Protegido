@@ -1,5 +1,8 @@
 const express = require("express");
 const router = express.Router();
+let Person = require("../models/person");
+let Producto = require("../models/producto");
+let Provedor = require("../models/provedor");
 
 const passport = require("passport");
 /**/
@@ -7,15 +10,15 @@ router.get("/", (req, res, next) => {
   res.render("login");
 });
 
-router.get("/signup", (req, res, next) => {
-  res.render("signup");
+router.get("/person", (req, res, next) => {
+  res.render("person");
 });
 
 router.post(
-  "/signup",
+  "/person",
   passport.authenticate("local-signup", {
     successRedirect: "/",
-    failureRedirect: "/signup",
+    failureRedirect: "/person",
     passReqToCallback: true,
   })
 );
@@ -39,6 +42,16 @@ router.get(
     res.render("mainPage");
   }
 );
+
+router.get("/listPerson", (req, res, next) => {
+  Person.find()
+    .then((person) => {
+      res.render("personIndex", { person });
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
 
 router.get("/logout", (req, res, next) => {
   req.logout(() => {
