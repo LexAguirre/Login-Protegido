@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/assets/style.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale = 1.0" />
+    <title>Actualizar provedor</title>
+  </head>
+  <body>
+    <h1>Actualizar provedor</h1>
+
+    <form action="/updateProvedor" method="post">
+      <label for="empresa">Nombre de la empresa:</label>
+      <input
+        type="text"
+        id="empresa"
+        name="empresa"
+        value="<%= `${provedor.empresa}` %>"
+      /><br /><br />
+      <label for="rfc">RFC:</label>
+      <input
+        type="text"
+        id="rfc"
+        name="rfc"
+        value="<%= `${provedor.rfc}` %>"
+      /><br /><br />
+      <label for="tipo">Tipo:</label>
+      <input
+        type="text"
+        id="tipo"
+        name="tipo"
+        value="<%= `${provedor.tipo}` %>"
+      /><br /><br />
+      <label for="correo">Correo:</label>
+      <input
+        type="text"
+        id="correo"
+        name="correo"
+        value="<%= `${provedor.correo}` %>"
+      /><br /><br />
+      <label for="telefono">Teléfono:</label>
+      <input
+        type="text"
+        id="telefono"
+        name="telefono"
+        value="<%= `${provedor.telefono}` %>"
+      /><br /><br />
+      <label for="encargado">Encargado:</label>
+      <input
+        type="text"
+        id="encargado"
+        name="encargado"
+        value="<%= `${provedor.encargado}` %>"
+      /><br /><br />
+      <label for="objId">ID:</label>
+      <input
+        type="text"
+        id="objId"
+        name="objId"
+        value="<%= `${provedor._id}` %>"
+      /><br /><br />
+      <!--Se crea un formulario para que reciba la informacion ingresada y la manda a provedor.js para que pueda ingresarla a MongoDB -->
+      <input type="submit" value="submit" />
+    </form>
+    <br />
+    <a href="/listProvedor">Regresar</a><br />
+  </body>
+</html>

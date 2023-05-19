@@ -49,6 +49,12 @@
           <form class="form-inline navbar-brand">
             <a
               class="btn btn-sm btn-outline-secondary"
+              href="/mainPage"
+              type="button"
+              >Página principal</a
+            >
+            <a
+              class="btn btn-sm btn-outline-secondary"
               href="/profile"
               type="button"
               >Perfil</a
@@ -89,10 +95,90 @@
               type="button"
               >Registro proveedores</a
             >
-            <a <a class="btn btn-outline-danger" type="button">Cerrar sesión</a>
+            <a class="btn btn-outline-danger" type="button">Cerrar sesión</a>
           </form>
         </div>
       </nav>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 offset-md-4">
+        <div class="card text-white bg-dark mt-4">
+          <div class="card-header text-white bg-dark text-center">
+            <h3>Actualizar de información del personal</h3>
+          </div>
+          <div class="card-body">
+            <form action="/updatePerson" method="post">
+              <div class="form-group">
+                <label for="ID" class="col-form-label"
+                  ><strong>ID</strong></label
+                >
+                <input
+                  class="form-control"
+                  type="text"
+                  name="id"
+                  id="id"
+                  value="<%= `${person._id}` %>"
+                />
+              </div>
+              <div class="form-group">
+                <label for="name" class="col-form-label"
+                  ><strong>Nombres</strong></label
+                >
+                <input
+                  class="form-control"
+                  type="text"
+                  id="name"
+                  name="name"
+                  value="<%= `${person.name}` %>"
+                />
+              </div>
+              <div class="form-group">
+                <label for="lastName class="col-form-label"
+                  ><strong>Apellidos</strong></label
+                >
+                <input
+                  class="form-control"
+                  type="text"
+                  id="lastName"
+                  name="lastName"
+                  value="<%= `${person.lastName}` %>"
+                />
+              </div>
+              <div class="form-group">
+                <label for="phone" class="col-form-label"
+                  ><strong>Número de telefono</strong></label
+                >
+                <input
+                  type="tel"
+                  name="phone"
+                  id="phone"
+                  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                  value="<%= `${person.phone}` %>"
+                />
+              </div>
+              <div class="form-group">
+                <label for="email" class="col-form-label"
+                  ><strong>Correo electrónico</strong></label
+                >
+                <input
+                  class="form-control"
+                  type="email"
+                  name="email"
+                  id="email"
+                  value="<%= `${person.email}` %>"
+                />
+              </div>
+              <button class="btn btn-primary btn-block mt-4" type="submit">
+                Editar datos
+              </button> 
+            </form>
+              <button class="btn btn-danger btn-block mt-4" href="/listPerson" type="submit">
+                Cancelar
+              </button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script

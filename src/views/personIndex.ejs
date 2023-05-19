@@ -49,31 +49,31 @@
           <form class="form-inline navbar-brand">
             <a
               class="btn btn-sm btn-outline-secondary"
+              href="/mainPage"
+              type="button"
+              >Página principal</a
+            >
+            <a
+              class="btn btn-sm btn-outline-secondary"
               href="/profile"
               type="button"
               >Perfil</a
             >
             <a
               class="btn btn-sm btn-outline-secondary"
-              href="/profile"
+              href="/listProducto"
               type="button"
               >Vista productos</a
             >
             <a
               class="btn btn-sm btn-outline-secondary"
-              href="/profile"
-              type="button"
-              >Vista personal</a
-            >
-            <a
-              class="btn btn-sm btn-outline-secondary"
-              href="/profile"
+              href="/listProvedor"
               type="button"
               >Vista proveedores</a
             >
             <a
               class="btn btn-sm btn-outline-secondary"
-              href="/profile"
+              href="/addProducto"
               type="button"
               >Registro productos</a
             >
@@ -85,7 +85,7 @@
             >
             <a
               class="btn btn-sm btn-outline-secondary"
-              href="/profile"
+              href="/addProvedor"
               type="button"
               >Registro proveedores</a
             >
@@ -120,11 +120,11 @@
             padding: 12px 15px;
           "
         >
+          <th>ID</th>
           <th>Nombre</th>
           <th>Apellido</th>
           <th>Número telefonico</th>
           <th>Email</th>
-          <th>Contraseña</th>
           <th></th>
           <th></th>
           <!--Se crean dos columnas sin nombre-->
@@ -139,11 +139,11 @@
             text-align: center;
           "
         >
-          <td style="padding: 12px 15px"><%- person[prop].name %></td>
+          <td style="padding: 12px 15px"><%- person[prop]._id %></td>
+          <td><%- person[prop].name %></td>
           <td><%- person[prop].lastName %></td>
           <td><%- person[prop].phone %></td>
           <td><%- person[prop].email %></td>
-          <td>$ <%- person[prop].password %></td>
           <td>
             <a href="<%= `deletePerson/${person[prop]._id}` %>">Eliminar</a>
           </td>

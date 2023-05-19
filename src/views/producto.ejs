@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/assets/style.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale = 1.0" />
+    <title>Agregar Producto</title>
+  </head>
+  <body>
+    <h1>Agregar Producto</h1>
+
+    <form action="/addProducto" method="post">
+      <label for="codigoProducto">Codigo del producto:</label>
+      <input
+        type="text"
+        id="codigoProducto"
+        name="codigoProducto"
+      /><br /><br />
+      <label for="provedor">Provedor:</label>
+      <input type="text" id="provedor" name="provedor" /><br /><br />
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" /><br /><br />
+      <label for="cantidad">Cantidad:</label>
+      <input type="text" id="cantidad" name="cantidad" /><br /><br />
+      <label for="precio">Precio:</label>
+      <input type="text" id="precio" name="precio" /><br /><br />
+      <!--Se crea un formulario para que reciba la informacion ingresada y la manda a person.js para que pueda ingresarla a MongoDB -->
+      <input type="submit" value="submit" />
+    </form>
+    <br />
+    <a href="/">Regresar</a><br />
+  </body>
+</html>

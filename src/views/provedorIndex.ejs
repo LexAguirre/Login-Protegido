@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="/assets/style.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lista de provedores</title>
+  </head>
+  <body>
+    <div class="headerlista">
+      <h1 style="color: #ffffff">Lista de provedores</h1>
+    </div>
+
+    <table class="styled-table">
+      <tr>
+        <th>Nombre de la empresa</th>
+        <th>RFC</th>
+        <th>Tipo</th>
+        <th>Correo</th>
+        <th>Teléfono</th>
+        <th>Encargado</th>
+        <th></th>
+        <th></th>
+        <!--Se crean dos columnas sin nombre-->
+      </tr>
+      <!--Dentro de la tabla se estara ingresando la informacion proveniente del json-->
+      <% Object.keys(provedor).forEach(function(prop) { %>
+      <!--Menciona que por cada llave de provedor utilizara un prop-->
+      <tr>
+        <td><%- provedor[prop].empresa %></td>
+        <td><%- provedor[prop].rfc %></td>
+        <td><%- provedor[prop].tipo %></td>
+        <td><%- provedor[prop].correo %></td>
+        <td><%- provedor[prop].telefono %></td>
+        <td><%- provedor[prop].encargado %></td>
+        <td>
+          <a href="<%= `deleteProvedor/${provedor[prop]._id}` %>">Delete</a>
+        </td>
+        <td>
+          <a href="<%= `ProvfindById/${provedor[prop]._id}` %>">Update</a>
+        </td>
+        <!--Se crean la edicion y eliminacion del documento por medio de un hipervinculo-->
+      </tr>
+      <% }); %>
+    </table>
+
+    <br />
+    <a href="/">Regresar</a><br />
+  </body>
+</html>

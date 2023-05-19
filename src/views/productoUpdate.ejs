@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/assets/style.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale = 1.0" />
+    <title>Actualizar productos</title>
+  </head>
+  <body>
+    <h1>Actualizar productos</h1>
+
+    <form action="/updateProducto" method="post">
+      <label for="nss">Código de barras:</label>
+      <input
+        type="text"
+        id="codigoProducto"
+        name="codigoProducto"
+        value="<%= `${producto.codigoProducto}` %>"
+      /><br /><br />
+      <label for="nombre">Provedor:</label>
+      <input
+        type="text"
+        id="provedor"
+        name="provedor"
+        value="<%= `${producto.provedor}` %>"
+      /><br /><br />
+      <label for="nombre">Nombre:</label>
+      <input
+        type="text"
+        id="nombre"
+        name="nombre"
+        value="<%= `${producto.nombre}` %>"
+      /><br /><br />
+      <label for="cantidad">Cantidad:</label>
+      <input
+        type="text"
+        id="cantidad"
+        name="cantidad"
+        value="<%= `${producto.cantidad}` %>"
+      /><br /><br />
+      <label for="precio">Precio:</label>
+      <input
+        type="Number"
+        id="precio"
+        name="precio"
+        value="<%= `${producto.precio}` %>"
+      /><br /><br />
+      <label for="objId">ID:</label>
+      <input
+        type="text"
+        id="objId"
+        name="objId"
+        value="<%= `${producto._id}` %>"
+      /><br /><br />
+      <!--Se crea un formulario para que reciba la informacion ingresada y la manda a producto.js para que pueda ingresarla a MongoDB -->
+      <input type="submit" value="submit" />
+    </form>
+    <br />
+    <a href="/listProducto">Regresar</a><br />
+  </body>
+</html>
