@@ -95,7 +95,9 @@
               type="button"
               >Registro proveedores</a
             >
-            <a class="btn btn-outline-danger" type="button">Cerrar sesión</a>
+            <a class="btn btn-outline-danger" href="/logout" type="button"
+              >Cerrar sesión</a
+            >
           </form>
         </div>
       </nav>
@@ -150,6 +152,7 @@
                   ><strong>Número de telefono</strong></label
                 >
                 <input
+                  class="form-control"
                   type="tel"
                   name="phone"
                   id="phone"
@@ -173,9 +176,9 @@
                 Editar datos
               </button> 
             </form>
-              <button class="btn btn-danger btn-block mt-4" href="/listPerson" type="submit">
+              <a class="btn btn-danger btn-block mt-4" href="/listPerson" type="submit">
                 Cancelar
-              </button>
+              </a>
           </div>
         </div>
       </div>

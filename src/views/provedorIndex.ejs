@@ -1,51 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="/assets/style.css" />
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lista de provedores</title>
+    <title>LogIn</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script
+      src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+      async
+      defer
+    ></script>
+    <script
+      src="https://kit.fontawesome.com/7f30cdf123.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
-    <div class="headerlista">
-      <h1 style="color: #ffffff">Lista de provedores</h1>
+    <div class="container-fluid sticky-top" style="background-color: #086e5d">
+      <!-- NavBar -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand">Farmacia</a>
+        <img
+          src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/2a69b018212139.562c5c3107147.png"
+          width="100"
+          height="70"
+          alt="logo"
+          class="mx-auto d-block"
+        />
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-brand" id="navbarNav">
+          <form class="form-inline navbar-brand">
+            <a
+              class="btn btn-sm btn-outline-secondary"
+              href="/mainPage"
+              type="button"
+              >Página principal</a
+            >
+            <a
+              class="btn btn-sm btn-outline-secondary"
+              href="/profile"
+              type="button"
+              >Perfil</a
+            >
+            <a
+              class="btn btn-sm btn-outline-secondary"
+              href="/listPerson"
+              type="button"
+              >Vista personal</a
+            >
+            <a
+              class="btn btn-sm btn-outline-secondary"
+              href="/listProducto"
+              type="button"
+              >Vista productos</a
+            >
+            <a
+              class="btn btn-sm btn-outline-secondary"
+              href="/addProducto"
+              type="button"
+              >Registro productos</a
+            >
+            <a
+              class="btn btn-sm btn-outline-secondary"
+              href="/person"
+              type="button"
+              >Registro personal</a
+            >
+            <a
+              class="btn btn-sm btn-outline-secondary"
+              href="/addProvedor"
+              type="button"
+              >Registro proveedores</a
+            >
+            <a <a class="btn btn-outline-danger" type="button">Cerrar sesión</a>
+          </form>
+        </div>
+      </nav>
     </div>
 
-    <table class="styled-table">
-      <tr>
-        <th>Nombre de la empresa</th>
-        <th>RFC</th>
-        <th>Tipo</th>
-        <th>Correo</th>
-        <th>Teléfono</th>
-        <th>Encargado</th>
-        <th></th>
-        <th></th>
-        <!--Se crean dos columnas sin nombre-->
-      </tr>
-      <!--Dentro de la tabla se estara ingresando la informacion proveniente del json-->
-      <% Object.keys(provedor).forEach(function(prop) { %>
-      <!--Menciona que por cada llave de provedor utilizara un prop-->
-      <tr>
-        <td><%- provedor[prop].empresa %></td>
-        <td><%- provedor[prop].rfc %></td>
-        <td><%- provedor[prop].tipo %></td>
-        <td><%- provedor[prop].correo %></td>
-        <td><%- provedor[prop].telefono %></td>
-        <td><%- provedor[prop].encargado %></td>
-        <td>
-          <a href="<%= `deleteProvedor/${provedor[prop]._id}` %>">Delete</a>
-        </td>
-        <td>
-          <a href="<%= `ProvfindById/${provedor[prop]._id}` %>">Update</a>
-        </td>
-        <!--Se crean la edicion y eliminacion del documento por medio de un hipervinculo-->
-      </tr>
-      <% }); %>
-    </table>
-
     <br />
-    <a href="/">Regresar</a><br />
+    <center><h1>Lista de provedores</h1></center>
+
+    <center>
+      <table
+        class="styled-table"
+        style="
+          width: 100%;
+          border-collapse: collapse;
+          margin: 25px 0;
+          font-size: 0.9em;
+          font-family: sans-serif;
+          min-width: 400px;
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        "
+      >
+        <tr
+          style="
+            background-color: #086e5d;
+            color: #ffffff;
+            text-align: center;
+            border-bottom: 2px solid #dddddd;
+            padding: 12px 15px;
+          "
+        >
+          <th>Nombre de la empresa</th>
+          <th>RFC</th>
+          <th>Tipo</th>
+          <th>Correo</th>
+          <th>Teléfono</th>
+          <th>Encargado</th>
+          <th></th>
+          <th></th>
+          <!--Se crean dos columnas sin nombre-->
+        </tr>
+        <!--Dentro de la tabla se estara ingresando la informacion proveniente del json-->
+        <% Object.keys(provedor).forEach(function(prop) { %>
+        <!--Menciona que por cada llave de person utilizara un prop-->
+        <tr
+          style="
+            background-color: #f3f3f3;
+            border-bottom: 2px solid #009879;
+            text-align: center;
+          "
+        >
+          <td style="padding: 12px 15px"><%- provedor[prop].empresa %></td>
+          <td><%- provedor[prop].rfc %></td>
+          <td><%- provedor[prop].tipo %></td>
+          <td><%- provedor[prop].correo %></td>
+          <td><%- provedor[prop].telefono %></td>
+          <td><%- provedor[prop].encargado %></td>
+          <td>
+            <a href="<%= `deleteProvedor/${provedor[prop]._id}` %>">Eliminar</a>
+          </td>
+          <td>
+            <a href="<%= `ProvfindById/${provedor[prop]._id}` %>">Editar</a>
+          </td>
+        </tr>
+        <% }); %>
+      </table>
+    </center>
+
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

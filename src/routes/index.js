@@ -96,12 +96,16 @@ router.post("/updatePerson", function (req, res, next) {
 // ---------------A partir de aquí segunda variable--------------------------------
 
 router.get("/listProducto", (req, res, next) => {
-  Producto.find(function (err, producto) {
-    if (err) return next(err);
-    //res.json(person); Ahora en lugar de renderizar el json de person
-    res.render("productoIndex", { producto }); //Ejecutara el archivo 'personIndex' y tambien le envia el json
-  });
-}); //Se crea la ruta para ver el listo de registros en la coleccion
+  Producto.find()
+    .exec()
+    .then((producto) => {
+      res.render("productoIndex", { producto });
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+//Se crea la ruta para ver el listo de registros en la coleccion
 
 router.get("/addProducto", function (req, res) {
   res.render("producto");
@@ -123,46 +127,57 @@ router.post("/addProducto", function (req, res) {
 
 //DELETE producto - findByIdAndRemove
 router.get("/deleteProducto/:id", function (req, res, next) {
-  Producto.findByIdAndRemove(req.params.id, req.body, function (err, post) {
-    if (err) return next(err); // Se crea la funcion la cual encontrara y eliminara el objeto deseado
-    res.redirect("/listProducto"); // Se recarga la pagina para actualizarse
-  });
+  Producto.findByIdAndRemove(req.params.id)
+    .then(() => {
+      res.redirect("/listProducto");
+    })
+    .catch((err) => {
+      next(err);
+    });
 });
 
 //EDIT producto - findById
 router.get("/PfindById/:id", function (req, res, next) {
-  Producto.findById(req.params.id, function (err, producto) {
-    if (err) return next(err); // Se crea la funcion la cual encontrara y se redirigira a la pagina de edicion
-    res.render("productoUpdate", { producto }); //Renderiza la pagina de edicion
-  });
+  Producto.findById(req.params.id)
+    .then((producto) => {
+      if (!producto) {
+        return res.status(404).send("Producto no encontrado");
+      }
+      res.render("productoUpdate", { producto });
+    })
+    .catch((err) => {
+      next(err);
+    });
 });
 
 router.post("/updateProducto", function (req, res, next) {
-  Producto.findByIdAndUpdate(
-    req.body.objId,
-    {
-      codigoProducto: req.body.codigoProducto,
-      provedor: req.body.provedor,
-      nombre: req.body.nombre,
-      cantidad: req.body.cantidad,
-      precio: req.body.precio,
-    }, //Actualiza la base de datos con lo editado en la pagina
-    function (err, post) {
-      if (err) return next(err);
+  Producto.findByIdAndUpdate(req.body.objId, {
+    codigoProducto: req.body.codigoProducto,
+    provedor: req.body.provedor,
+    nombre: req.body.nombre,
+    cantidad: req.body.cantidad,
+    precio: req.body.precio,
+  })
+    .then(() => {
       res.redirect("/listProducto");
-    }
-  ); //Se redirige a la pagina de la tabla actualizada
+    })
+    .catch((err) => {
+      next(err);
+    });
 });
 
 // ---------------A partir de aquí tercera variable--------------------------------
 
 router.get("/listProvedor", (req, res, next) => {
-  Provedor.find(function (err, provedor) {
-    if (err) return next(err);
-    //res.json(person); Ahora en lugar de renderizar el json de person
-    res.render("provedorIndex", { provedor }); //Ejecutara el archivo 'personIndex' y tambien le envia el json
-  });
-}); //Se crea la ruta para ver el listo de registros en la coleccion
+  Provedor.find()
+    .exec()
+    .then((provedor) => {
+      res.render("provedorIndex", { provedor });
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
 
 router.get("/addProvedor", function (req, res) {
   res.render("provedor");
@@ -185,36 +200,44 @@ router.post("/addProvedor", function (req, res) {
 
 //DELETE provedor - findByIdAndRemove
 router.get("/deleteProvedor/:id", function (req, res, next) {
-  Provedor.findByIdAndRemove(req.params.id, req.body, function (err, post) {
-    if (err) return next(err); // Se crea la funcion la cual encontrara y eliminara el objeto deseado
-    res.redirect("/listProvedor"); // Se recarga la pagina para actualizarse
-  });
+  Provedor.findByIdAndRemove(req.params.id)
+    .then(() => {
+      res.redirect("/listProvedor"); // Se redirige a la página de la lista actualizada
+    })
+    .catch((err) => {
+      next(err);
+    });
 });
 
 //EDIT provedor - findById
 router.get("/ProvfindById/:id", function (req, res, next) {
-  Provedor.findById(req.params.id, function (err, provedor) {
-    if (err) return next(err); // Se crea la funcion la cual encontrara y se redirigira a la pagina de edicion
-    res.render("provedorUpdate", { provedor }); //Renderiza la pagina de edicion
-  });
+  Provedor.findById(req.params.id)
+    .then((provedor) => {
+      if (!provedor) {
+        return res.status(404).send("Proveedor no encontrado");
+      }
+      res.render("provedorUpdate", { provedor }); // Renderiza la página de edición con el proveedor encontrado
+    })
+    .catch((err) => {
+      next(err);
+    });
 });
 
 router.post("/updateProvedor", function (req, res, next) {
-  Provedor.findByIdAndUpdate(
-    req.body.objId,
-    {
-      empresa: req.body.empresa,
-      rfc: req.body.rfc,
-      tipo: req.body.tipo,
-      correo: req.body.correo,
-      telefono: req.body.telefono,
-      encargado: req.body.encargado,
-    }, //Actualiza la base de datos con lo editado en la pagina
-    function (err, post) {
-      if (err) return next(err);
-      res.redirect("/listProvedor");
-    }
-  ); //Se redirige a la pagina de la tabla actualizada
+  Provedor.findByIdAndUpdate(req.body.objId, {
+    empresa: req.body.empresa,
+    rfc: req.body.rfc,
+    tipo: req.body.tipo,
+    correo: req.body.correo,
+    telefono: req.body.telefono,
+    encargado: req.body.encargado,
+  })
+    .then(() => {
+      res.redirect("/listProvedor"); // Se redirige a la página de la tabla actualizada
+    })
+    .catch((err) => {
+      next(err);
+    });
 });
 
 router.get("/logout", (req, res, next) => {
