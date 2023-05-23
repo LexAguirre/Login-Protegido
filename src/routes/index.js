@@ -231,6 +231,7 @@ router.post("/updateProvedor", function (req, res, next) {
     correo: req.body.correo,
     telefono: req.body.telefono,
     encargado: req.body.encargado,
+    id: req.body._ID,
   })
     .then(() => {
       res.redirect("/listProvedor"); // Se redirige a la página de la tabla actualizada

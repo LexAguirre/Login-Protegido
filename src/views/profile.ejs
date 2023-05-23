@@ -46,53 +46,55 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-brand" id="navbarNav">
-          <form class="form-inline navbar-brand">
-            <a
-              class="btn btn-sm btn-outline-secondary"
-              href="/mainPage"
-              type="button"
-              >Página principal</a
-            >
-            <a
-              class="btn btn-sm btn-outline-secondary"
-              href="/listProducto"
-              type="button"
-              >Vista productos</a
-            >
-            <a
-              class="btn btn-sm btn-outline-secondary"
-              href="/listPerson"
-              type="button"
-              >Vista personal</a
-            >
-            <a
-              class="btn btn-sm btn-outline-secondary"
-              href="/listProvedor"
-              type="button"
-              >Vista proveedores</a
-            >
-            <a
-              class="btn btn-sm btn-outline-secondary"
-              href="/addProducto"
-              type="button"
-              >Registro productos</a
-            >
-            <a
-              class="btn btn-sm btn-outline-secondary"
-              href="/person"
-              type="button"
-              >Registro personal</a
-            >
-            <a
-              class="btn btn-sm btn-outline-secondary"
-              href="/addProvedor"
-              type="button"
-              >Registro proveedores</a
-            >
-            <a class="btn btn-outline-danger" href="/logout" type="button"
-              >Cerrar sesión</a
-            >
-          </form>
+          <div class="collapse navbar-brand" id="navbarNav">
+            <form class="form-inline navbar-brand">
+              <a
+                class="btn btn-sm btn-outline-secondary"
+                href="/mainPage"
+                type="button"
+                >Página principal</a
+              >
+              <a
+                class="btn btn-sm btn-outline-secondary"
+                href="/listProducto"
+                type="button"
+                >Vista productos</a
+              >
+              <a
+                class="btn btn-sm btn-outline-secondary"
+                href="/listPerson"
+                type="button"
+                >Vista personal</a
+              >
+              <a
+                class="btn btn-sm btn-outline-secondary"
+                href="/listProvedor"
+                type="button"
+                >Vista proveedores</a
+              >
+              <a
+                class="btn btn-sm btn-outline-secondary"
+                href="/addProducto"
+                type="button"
+                >Registro productos</a
+              >
+              <a
+                class="btn btn-sm btn-outline-secondary"
+                href="/person"
+                type="button"
+                >Registro personal</a
+              >
+              <a
+                class="btn btn-sm btn-outline-secondary"
+                href="/addProvedor"
+                type="button"
+                >Registro proveedores</a
+              >
+              <a class="btn btn-outline-danger" href="/logout" type="button"
+                >Cerrar sesión</a
+              >
+            </form>
+          </div>
         </div>
       </nav>
     </div>
@@ -107,7 +109,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            height: 70vh;
           "
         >
           <div class="col-md-4">
@@ -119,8 +121,14 @@
           <div class="col-md-8">
             <div class="card-body">
               <h3><strong>NAME: </strong><%= user.name %></h3>
-              <p><strong>EMAIL: </strong><%= user.email %></p>
-              <p><strong>PASSWORD: </strong><%= user.password %></p>
+              <br />
+              <h3><strong>LAST NAME: </strong><%= user.lastName %></h3>
+              <br />
+              <h4><strong>EMAIL: </strong><%= user.email %></h4>
+              <br />
+              <h4><strong>PHONE NUMBER: </strong><%= user.phone %></h4>
+              <br />
+              <h4><strong>PASSWORD: </strong><%= user.password %></h4>
             </div>
           </div>
         </div>
