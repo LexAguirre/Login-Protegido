@@ -21,9 +21,6 @@
       src="https://kit.fontawesome.com/7f30cdf123.js"
       crossorigin="anonymous"
     ></script>
-    <script>
-      console.log(person.isAdmin);
-    </script>
   </head>
   <body>
     <div class="container-fluid sticky-top" style="background-color: #086e5d">
@@ -57,14 +54,14 @@
               type="button"
               >Perfil</a
             >
-            <% if (person.isAdmin != true) { %> prueba 3
+            <% if (user.isAdmin != true) { %>
             <a
               class="btn btn-sm btn-outline-secondary"
               href="/listProducto"
               type="button"
               >Vista productos</a
             >
-            <% } else if (console.log(person.isAdmin == true)){ %> prueba2
+            <% } else{ %>
             <a
               class="btn btn-sm btn-outline-secondary"
               href="/listProducto"

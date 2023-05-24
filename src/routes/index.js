@@ -10,7 +10,7 @@ router.get("/", (req, res, next) => {
   res.render("login");
 });
 
-router.get("/person", isAuthenticated, (req, res, next) => {
+router.get("/person", isAuthenticated, isntAdmin, (req, res, next) => {
   res.render("person");
 });
 
@@ -47,7 +47,7 @@ router.get("/mainPage", isAuthenticated, (req, res, next) => {
     });
 });
 
-router.get("/listPerson", isAuthenticated, (req, res, next) => {
+router.get("/listPerson", isAuthenticated, isntAdmin, (req, res, next) => {
   Person.find()
     .then((person) => {
       res.render("personIndex", { person });
@@ -57,45 +57,60 @@ router.get("/listPerson", isAuthenticated, (req, res, next) => {
     });
 });
 
-router.get("/deletePerson/:id", isAuthenticated, function (req, res, next) {
-  Person.findByIdAndRemove(req.params.id, req.body)
-    .then(() => {
-      res.redirect("/listPerson"); // Se redirige a la página de listado después de eliminar exitosamente
-    })
-    .catch((err) => {
-      return next(err);
-    });
-});
+router.get(
+  "/deletePerson/:id",
+  isAuthenticated,
+  isntAdmin,
+  function (req, res, next) {
+    Person.findByIdAndRemove(req.params.id, req.body)
+      .then(() => {
+        res.redirect("/listPerson"); // Se redirige a la página de listado después de eliminar exitosamente
+      })
+      .catch((err) => {
+        return next(err);
+      });
+  }
+);
 
-router.get("/findById/:id", isAuthenticated, function (req, res, next) {
-  Person.findById(req.params.id)
-    .exec()
-    .then((person) => {
-      if (!person) {
-        return res.status(404).send("Persona no encontrada");
-      }
-      res.render("personUpdate", { person });
-    })
-    .catch((err) => {
-      return next(err);
-    });
-});
+router.get(
+  "/findById/:id",
+  isAuthenticated,
+  isntAdmin,
+  function (req, res, next) {
+    Person.findById(req.params.id)
+      .exec()
+      .then((person) => {
+        if (!person) {
+          return res.status(404).send("Persona no encontrada");
+        }
+        res.render("personUpdate", { person });
+      })
+      .catch((err) => {
+        return next(err);
+      });
+  }
+);
 
-router.post("/updatePerson", isAuthenticated, async (req, res, next) => {
-  await Person.findByIdAndUpdate(req.body.id, {
-    id: req.body.id,
-    name: req.body.name,
-    lastName: req.body.lastName,
-    phone: req.body.phone,
-    email: req.body.email,
-  })
-    .then(() => {
-      res.redirect("/listPerson");
+router.post(
+  "/updatePerson",
+  isAuthenticated,
+  isntAdmin,
+  async (req, res, next) => {
+    await Person.findByIdAndUpdate(req.body.id, {
+      id: req.body.id,
+      name: req.body.name,
+      lastName: req.body.lastName,
+      phone: req.body.phone,
+      email: req.body.email,
     })
-    .catch((err) => {
-      next(err);
-    });
-});
+      .then(() => {
+        res.redirect("/listPerson");
+      })
+      .catch((err) => {
+        next(err);
+      });
+  }
+);
 
 // ---------------A partir de aquí segunda variable--------------------------------
 
@@ -111,11 +126,11 @@ router.get("/listProducto", isAuthenticated, (req, res, next) => {
 });
 //Se crea la ruta para ver el listo de registros en la coleccion
 
-router.get("/addProducto", isAuthenticated, function (req, res) {
+router.get("/addProducto", isAuthenticated, isntAdmin, function (req, res) {
   res.render("producto");
 }); //Se crea el render con el objetivo poder ver el formulario donde podremos enviar los datos
 
-router.post("/addProducto", isAuthenticated, function (req, res) {
+router.post("/addProducto", isAuthenticated, isntAdmin, function (req, res) {
   const myProducto = new Producto({
     codigoProducto: req.body.codigoProducto,
     provedor: req.body.provedor,
@@ -130,49 +145,64 @@ router.post("/addProducto", isAuthenticated, function (req, res) {
 // Se crea una ruta a la cual va a poder acceder el servidor para poder observar la colecion
 
 //DELETE producto - findByIdAndRemove
-router.get("/deleteProducto/:id", isAuthenticated, function (req, res, next) {
-  Producto.findByIdAndRemove(req.params.id)
-    .then(() => {
-      res.redirect("/listProducto");
-    })
-    .catch((err) => {
-      next(err);
-    });
-});
+router.get(
+  "/deleteProducto/:id",
+  isAuthenticated,
+  isntAdmin,
+  function (req, res, next) {
+    Producto.findByIdAndRemove(req.params.id)
+      .then(() => {
+        res.redirect("/listProducto");
+      })
+      .catch((err) => {
+        next(err);
+      });
+  }
+);
 
 //EDIT producto - findById
-router.get("/PfindById/:id", isAuthenticated, function (req, res, next) {
-  Producto.findById(req.params.id)
-    .then((producto) => {
-      if (!producto) {
-        return res.status(404).send("Producto no encontrado");
-      }
-      res.render("productoUpdate", { producto });
-    })
-    .catch((err) => {
-      next(err);
-    });
-});
+router.get(
+  "/PfindById/:id",
+  isAuthenticated,
+  isntAdmin,
+  function (req, res, next) {
+    Producto.findById(req.params.id)
+      .then((producto) => {
+        if (!producto) {
+          return res.status(404).send("Producto no encontrado");
+        }
+        res.render("productoUpdate", { producto });
+      })
+      .catch((err) => {
+        next(err);
+      });
+  }
+);
 
-router.post("/updateProducto", isAuthenticated, function (req, res, next) {
-  Producto.findByIdAndUpdate(req.body.objId, {
-    codigoProducto: req.body.codigoProducto,
-    provedor: req.body.provedor,
-    nombre: req.body.nombre,
-    cantidad: req.body.cantidad,
-    precio: req.body.precio,
-  })
-    .then(() => {
-      res.redirect("/listProducto");
+router.post(
+  "/updateProducto",
+  isAuthenticated,
+  isntAdmin,
+  function (req, res, next) {
+    Producto.findByIdAndUpdate(req.body.objId, {
+      codigoProducto: req.body.codigoProducto,
+      provedor: req.body.provedor,
+      nombre: req.body.nombre,
+      cantidad: req.body.cantidad,
+      precio: req.body.precio,
     })
-    .catch((err) => {
-      next(err);
-    });
-});
+      .then(() => {
+        res.redirect("/listProducto");
+      })
+      .catch((err) => {
+        next(err);
+      });
+  }
+);
 
 // ---------------A partir de aquí tercera variable--------------------------------
 
-router.get("/listProvedor", isAuthenticated, (req, res, next) => {
+router.get("/listProvedor", isAuthenticated, isntAdmin, (req, res, next) => {
   Provedor.find()
     .exec()
     .then((provedor) => {
@@ -183,11 +213,11 @@ router.get("/listProvedor", isAuthenticated, (req, res, next) => {
     });
 });
 
-router.get("/addProvedor", isAuthenticated, function (req, res) {
+router.get("/addProvedor", isAuthenticated, isntAdmin, function (req, res) {
   res.render("provedor");
 }); //Se crea el render con el objetivo poder ver el formulario donde podremos enviar los datos
 
-router.post("/addProvedor", isAuthenticated, function (req, res) {
+router.post("/addProvedor", isAuthenticated, isntAdmin, function (req, res) {
   const myProvedor = new Provedor({
     empresa: req.body.empresa,
     rfc: req.body.rfc,
@@ -203,47 +233,62 @@ router.post("/addProvedor", isAuthenticated, function (req, res) {
 // Se crea una ruta a la cual va a poder acceder el servidor para poder observar la colecion
 
 //DELETE provedor - findByIdAndRemove
-router.get("/deleteProvedor/:id", isAuthenticated, function (req, res, next) {
-  Provedor.findByIdAndRemove(req.params.id)
-    .then(() => {
-      res.redirect("/listProvedor"); // Se redirige a la página de la lista actualizada
-    })
-    .catch((err) => {
-      next(err);
-    });
-});
+router.get(
+  "/deleteProvedor/:id",
+  isAuthenticated,
+  isntAdmin,
+  function (req, res, next) {
+    Provedor.findByIdAndRemove(req.params.id)
+      .then(() => {
+        res.redirect("/listProvedor"); // Se redirige a la página de la lista actualizada
+      })
+      .catch((err) => {
+        next(err);
+      });
+  }
+);
 
 //EDIT provedor - findById
-router.get("/ProvfindById/:id", isAuthenticated, function (req, res, next) {
-  Provedor.findById(req.params.id)
-    .then((provedor) => {
-      if (!provedor) {
-        return res.status(404).send("Proveedor no encontrado");
-      }
-      res.render("provedorUpdate", { provedor }); // Renderiza la página de edición con el proveedor encontrado
-    })
-    .catch((err) => {
-      next(err);
-    });
-});
+router.get(
+  "/ProvfindById/:id",
+  isAuthenticated,
+  isntAdmin,
+  function (req, res, next) {
+    Provedor.findById(req.params.id)
+      .then((provedor) => {
+        if (!provedor) {
+          return res.status(404).send("Proveedor no encontrado");
+        }
+        res.render("provedorUpdate", { provedor }); // Renderiza la página de edición con el proveedor encontrado
+      })
+      .catch((err) => {
+        next(err);
+      });
+  }
+);
 
-router.post("/updateProvedor", isAuthenticated, function (req, res, next) {
-  Provedor.findByIdAndUpdate(req.body.objId, {
-    empresa: req.body.empresa,
-    rfc: req.body.rfc,
-    tipo: req.body.tipo,
-    correo: req.body.correo,
-    telefono: req.body.telefono,
-    encargado: req.body.encargado,
-    id: req.body._ID,
-  })
-    .then(() => {
-      res.redirect("/listProvedor"); // Se redirige a la página de la tabla actualizada
+router.post(
+  "/updateProvedor",
+  isAuthenticated,
+  isntAdmin,
+  function (req, res, next) {
+    Provedor.findByIdAndUpdate(req.body.objId, {
+      empresa: req.body.empresa,
+      rfc: req.body.rfc,
+      tipo: req.body.tipo,
+      correo: req.body.correo,
+      telefono: req.body.telefono,
+      encargado: req.body.encargado,
+      id: req.body._ID,
     })
-    .catch((err) => {
-      next(err);
-    });
-});
+      .then(() => {
+        res.redirect("/listProvedor"); // Se redirige a la página de la tabla actualizada
+      })
+      .catch((err) => {
+        next(err);
+      });
+  }
+);
 
 router.get("/logout", (req, res, next) => {
   req.logout(() => {
@@ -260,9 +305,11 @@ function isAuthenticated(req, res, next) {
 }
 
 function isntAdmin(req, res, next) {
-  if (person[prop].isAdmin != true) {
-    res.redirect("/");
+  if (req.user && req.user.isAdmin) {
+    return next();
   }
+
+  res.redirect("/mainPage");
 }
 
 module.exports = router;

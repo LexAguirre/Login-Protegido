@@ -59,6 +59,7 @@
               type="button"
               >Perfil</a
             >
+            <% if (user.isAdmin != true) { %> <% } else { %>
             <a
               class="btn btn-sm btn-outline-secondary"
               href="/listPerson"
@@ -89,6 +90,7 @@
               type="button"
               >Registro proveedores</a
             >
+            <% } %>
             <a class="btn btn-outline-danger" href="/logout" type="button"
               >Cerrar sesión</a
             >
@@ -98,7 +100,7 @@
     </div>
 
     <br />
-    <center><h1>Prouctos</h1></center>
+    <center><h1>Productos</h1></center>
 
     <center>
       <table
@@ -122,6 +124,13 @@
             padding: 12px 15px;
           "
         >
+          <% if (user.isAdmin != true) { %>
+          <th>Codigo de productos</th>
+          <th>Proveedor</th>
+          <th>Nombre</th>
+          <th>Cantidad</th>
+          <th>Precio</th>
+          <% } else { %>
           <th>Codigo de productos</th>
           <th>Proveedor</th>
           <th>Nombre</th>
@@ -129,6 +138,7 @@
           <th>Precio</th>
           <th></th>
           <th></th>
+          <% } %>
           <!--Se crean dos columnas sin nombre-->
         </tr>
         <!--Dentro de la tabla se estara ingresando la informacion proveniente del json-->
@@ -141,6 +151,15 @@
             text-align: center;
           "
         >
+          <% if (user.isAdmin != true) { %>
+          <td style="padding: 12px 15px">
+            <%- producto[prop].codigoProducto %>
+          </td>
+          <td><%- producto[prop].provedor %></td>
+          <td><%- producto[prop].nombre %></td>
+          <td><%- producto[prop].cantidad %></td>
+          <td>$ <%- producto[prop].precio %></td>
+          <% } else { %>
           <td style="padding: 12px 15px">
             <%- producto[prop].codigoProducto %>
           </td>
@@ -152,6 +171,7 @@
             <a href="<%= `deleteProducto/${producto[prop]._id}` %>">Eliminar</a>
           </td>
           <td><a href="<%= `PfindById/${producto[prop]._id}` %>">Editar</a></td>
+          <% } %>
         </tr>
         <% }); %>
       </table>
