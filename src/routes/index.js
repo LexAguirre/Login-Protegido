@@ -5,12 +5,12 @@ let Producto = require("../models/producto");
 let Provedor = require("../models/provedor");
 
 const passport = require("passport");
-/**/
+
 router.get("/", (req, res, next) => {
   res.render("login");
 });
 
-router.get("/person", (req, res, next) => {
+router.get("/person", isAuthenticated, (req, res, next) => {
   res.render("person");
 });
 
@@ -36,14 +36,18 @@ router.get("/profile", isAuthenticated, (req, res, next) => {
   res.render("profile");
 });
 
-router.get(
-  "/mainPage",
-  /*isAuthenticated,*/ (req, res, next) => {
-    res.render("mainPage");
-  }
-);
+router.get("/mainPage", isAuthenticated, (req, res, next) => {
+  // res.render("mainPage");
+  Person.find()
+    .then((person) => {
+      res.render("mainPage", { person });
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
 
-router.get("/listPerson", (req, res, next) => {
+router.get("/listPerson", isAuthenticated, (req, res, next) => {
   Person.find()
     .then((person) => {
       res.render("personIndex", { person });
@@ -53,7 +57,7 @@ router.get("/listPerson", (req, res, next) => {
     });
 });
 
-router.get("/deletePerson/:id", function (req, res, next) {
+router.get("/deletePerson/:id", isAuthenticated, function (req, res, next) {
   Person.findByIdAndRemove(req.params.id, req.body)
     .then(() => {
       res.redirect("/listPerson"); // Se redirige a la página de listado después de eliminar exitosamente
@@ -63,7 +67,7 @@ router.get("/deletePerson/:id", function (req, res, next) {
     });
 });
 
-router.get("/findById/:id", function (req, res, next) {
+router.get("/findById/:id", isAuthenticated, function (req, res, next) {
   Person.findById(req.params.id)
     .exec()
     .then((person) => {
@@ -77,11 +81,11 @@ router.get("/findById/:id", function (req, res, next) {
     });
 });
 
-router.post("/updatePerson", function (req, res, next) {
-  Person.findByIdAndUpdate(req.body.objId, {
-    id: req.body.objId,
+router.post("/updatePerson", isAuthenticated, async (req, res, next) => {
+  await Person.findByIdAndUpdate(req.body.id, {
+    id: req.body.id,
     name: req.body.name,
-    lastName: req.body.edad,
+    lastName: req.body.lastName,
     phone: req.body.phone,
     email: req.body.email,
   })
@@ -95,7 +99,7 @@ router.post("/updatePerson", function (req, res, next) {
 
 // ---------------A partir de aquí segunda variable--------------------------------
 
-router.get("/listProducto", (req, res, next) => {
+router.get("/listProducto", isAuthenticated, (req, res, next) => {
   Producto.find()
     .exec()
     .then((producto) => {
@@ -107,11 +111,11 @@ router.get("/listProducto", (req, res, next) => {
 });
 //Se crea la ruta para ver el listo de registros en la coleccion
 
-router.get("/addProducto", function (req, res) {
+router.get("/addProducto", isAuthenticated, function (req, res) {
   res.render("producto");
 }); //Se crea el render con el objetivo poder ver el formulario donde podremos enviar los datos
 
-router.post("/addProducto", function (req, res) {
+router.post("/addProducto", isAuthenticated, function (req, res) {
   const myProducto = new Producto({
     codigoProducto: req.body.codigoProducto,
     provedor: req.body.provedor,
@@ -126,7 +130,7 @@ router.post("/addProducto", function (req, res) {
 // Se crea una ruta a la cual va a poder acceder el servidor para poder observar la colecion
 
 //DELETE producto - findByIdAndRemove
-router.get("/deleteProducto/:id", function (req, res, next) {
+router.get("/deleteProducto/:id", isAuthenticated, function (req, res, next) {
   Producto.findByIdAndRemove(req.params.id)
     .then(() => {
       res.redirect("/listProducto");
@@ -137,7 +141,7 @@ router.get("/deleteProducto/:id", function (req, res, next) {
 });
 
 //EDIT producto - findById
-router.get("/PfindById/:id", function (req, res, next) {
+router.get("/PfindById/:id", isAuthenticated, function (req, res, next) {
   Producto.findById(req.params.id)
     .then((producto) => {
       if (!producto) {
@@ -150,7 +154,7 @@ router.get("/PfindById/:id", function (req, res, next) {
     });
 });
 
-router.post("/updateProducto", function (req, res, next) {
+router.post("/updateProducto", isAuthenticated, function (req, res, next) {
   Producto.findByIdAndUpdate(req.body.objId, {
     codigoProducto: req.body.codigoProducto,
     provedor: req.body.provedor,
@@ -168,7 +172,7 @@ router.post("/updateProducto", function (req, res, next) {
 
 // ---------------A partir de aquí tercera variable--------------------------------
 
-router.get("/listProvedor", (req, res, next) => {
+router.get("/listProvedor", isAuthenticated, (req, res, next) => {
   Provedor.find()
     .exec()
     .then((provedor) => {
@@ -179,11 +183,11 @@ router.get("/listProvedor", (req, res, next) => {
     });
 });
 
-router.get("/addProvedor", function (req, res) {
+router.get("/addProvedor", isAuthenticated, function (req, res) {
   res.render("provedor");
 }); //Se crea el render con el objetivo poder ver el formulario donde podremos enviar los datos
 
-router.post("/addProvedor", function (req, res) {
+router.post("/addProvedor", isAuthenticated, function (req, res) {
   const myProvedor = new Provedor({
     empresa: req.body.empresa,
     rfc: req.body.rfc,
@@ -199,7 +203,7 @@ router.post("/addProvedor", function (req, res) {
 // Se crea una ruta a la cual va a poder acceder el servidor para poder observar la colecion
 
 //DELETE provedor - findByIdAndRemove
-router.get("/deleteProvedor/:id", function (req, res, next) {
+router.get("/deleteProvedor/:id", isAuthenticated, function (req, res, next) {
   Provedor.findByIdAndRemove(req.params.id)
     .then(() => {
       res.redirect("/listProvedor"); // Se redirige a la página de la lista actualizada
@@ -210,7 +214,7 @@ router.get("/deleteProvedor/:id", function (req, res, next) {
 });
 
 //EDIT provedor - findById
-router.get("/ProvfindById/:id", function (req, res, next) {
+router.get("/ProvfindById/:id", isAuthenticated, function (req, res, next) {
   Provedor.findById(req.params.id)
     .then((provedor) => {
       if (!provedor) {
@@ -223,7 +227,7 @@ router.get("/ProvfindById/:id", function (req, res, next) {
     });
 });
 
-router.post("/updateProvedor", function (req, res, next) {
+router.post("/updateProvedor", isAuthenticated, function (req, res, next) {
   Provedor.findByIdAndUpdate(req.body.objId, {
     empresa: req.body.empresa,
     rfc: req.body.rfc,
@@ -253,6 +257,12 @@ function isAuthenticated(req, res, next) {
   }
 
   res.redirect("/");
+}
+
+function isntAdmin(req, res, next) {
+  if (person[prop].isAdmin != true) {
+    res.redirect("/");
+  }
 }
 
 module.exports = router;

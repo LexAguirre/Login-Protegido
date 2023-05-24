@@ -53,52 +53,12 @@
               type="button"
               >Perfil</a
             >
-            <% if (user.isAdmin != true) { %>
             <a
               class="btn btn-sm btn-outline-secondary"
               href="/listProducto"
               type="button"
               >Vista productos</a
             >
-            <% } else { %>
-
-            <a
-              class="btn btn-sm btn-outline-secondary"
-              href="/listProducto"
-              type="button"
-              >Vista productos</a
-            >
-            <a
-              class="btn btn-sm btn-outline-secondary"
-              href="/listPerson"
-              type="button"
-              >Vista personal</a
-            >
-            <a
-              class="btn btn-sm btn-outline-secondary"
-              href="/listProvedor"
-              type="button"
-              >Vista proveedores</a
-            >
-            <a
-              class="btn btn-sm btn-outline-secondary"
-              href="/addProducto"
-              type="button"
-              >Registro productos</a
-            >
-            <a
-              class="btn btn-sm btn-outline-secondary"
-              href="/person"
-              type="button"
-              >Registro personal</a
-            >
-            <a
-              class="btn btn-sm btn-outline-secondary"
-              href="/addProvedor"
-              type="button"
-              >Registro proveedores</a
-            >
-            <% } %>
             <a class="btn btn-outline-danger" href="/logout" type="button"
               >Cerrar sesión</a
             >
@@ -106,44 +66,6 @@
         </div>
       </nav>
     </div>
-    <br />
-    <center><h1>Welcome!</h1></center>
-    <br />
-    <center>
-      <div class="card mb-3" style="max-width: 1200px">
-        <div
-          class="row no-gutters"
-          style="
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 70vh;
-          "
-        >
-          <div class="col-md-4">
-            <img
-              src="https://cdn.icon-icons.com/icons2/2483/PNG/512/user_icon_149851.png"
-              alt="..."
-            />
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h3><strong>Nombre: </strong><%= user.name %></h3>
-              <br />
-              <h3><strong>Apellido: </strong><%= user.lastName %></h3>
-              <br />
-              <h4><strong>Correo electorinico: </strong><%= user.email %></h4>
-              <br />
-              <h4><strong>Número telefonico: </strong><%= user.phone %></h4>
-              <br />
-              <h4><strong>Rol: </strong><%= user.isAdmin %></h4>
-              <br />
-              <h4><strong>PASSWORD: </strong><%= user.password %></h4>
-            </div>
-          </div>
-        </div>
-      </div>
-    </center>
 
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

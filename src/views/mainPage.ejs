@@ -21,6 +21,9 @@
       src="https://kit.fontawesome.com/7f30cdf123.js"
       crossorigin="anonymous"
     ></script>
+    <script>
+      console.log(person.isAdmin);
+    </script>
   </head>
   <body>
     <div class="container-fluid sticky-top" style="background-color: #086e5d">
@@ -45,6 +48,7 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="collapse navbar-brand" id="navbarNav">
           <form class="form-inline navbar-brand">
             <a
@@ -53,6 +57,14 @@
               type="button"
               >Perfil</a
             >
+            <% if (person.isAdmin != true) { %> prueba 3
+            <a
+              class="btn btn-sm btn-outline-secondary"
+              href="/listProducto"
+              type="button"
+              >Vista productos</a
+            >
+            <% } else if (console.log(person.isAdmin == true)){ %> prueba2
             <a
               class="btn btn-sm btn-outline-secondary"
               href="/listProducto"
@@ -89,6 +101,7 @@
               type="button"
               >Registro proveedores</a
             >
+            <% } %>
             <a class="btn btn-outline-danger" href="/logout" type="button"
               >Cerrar sesión</a
             >

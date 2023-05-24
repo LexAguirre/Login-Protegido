@@ -7,6 +7,7 @@ const PersonSchema = new Schema({
   lastName: String,
   phone: String,
   email: String,
+  isAdmin: Boolean,
   password: String,
 });
 

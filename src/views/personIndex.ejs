@@ -127,6 +127,7 @@
           <th>Apellido</th>
           <th>Número telefonico</th>
           <th>Email</th>
+          <th>isAdmin</th>
           <th></th>
           <th></th>
           <!--Se crean dos columnas sin nombre-->
@@ -146,6 +147,7 @@
           <td><%- person[prop].lastName %></td>
           <td><%- person[prop].phone %></td>
           <td><%- person[prop].email %></td>
+          <td><%- person[prop].isAdmin %></td>
           <td>
             <a href="<%= `deletePerson/${person[prop]._id}` %>">Eliminar</a>
           </td>

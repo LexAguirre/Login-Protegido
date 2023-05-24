@@ -41,6 +41,7 @@ passport.use(
         newUser.lastName = req.body.lastName;
         newUser.phone = req.body.phone;
         newUser.email = email;
+        newUser.isAdmin = false;
         newUser.password = newUser.encryptPassword(password);
         await newUser.save();
         done(null, newUser);
